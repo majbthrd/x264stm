@@ -1,0 +1,119 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution Name="x264stm" target="8" version="2">
+  <project Name="x264stm">
+    <configuration
+      Name="Common"
+      Placement="Flash"
+      Target="STM32F429ZI"
+      arm_architecture="v7EM"
+      arm_core_type="Cortex-M4"
+      arm_fpu_type="FPv4-SP-D16"
+      arm_gcc_target="arm-unknown-eabi"
+      arm_linker_heap_size="32768"
+      arm_linker_jtag_pad_pre_dr="1"
+      arm_linker_jtag_pad_pre_ir="5"
+      arm_linker_process_stack_size="0"
+      arm_linker_stack_size="131072"
+      arm_simulator_memory_simulation_filename="$(TargetsDir)/STM32/STM32SimulatorMemory.dll"
+      arm_simulator_memory_simulation_parameter="STM32F429ZI;0x200000;0x40000"
+      arm_target_connect_with_reset="Yes"
+      arm_target_debug_interface_type="ADIv5"
+      arm_target_interface_type="Default"
+      arm_target_loader_applicable_loaders="Flash"
+      arm_target_loader_default_loader="Flash"
+      arm_target_restrict_memory_accesses="Yes"
+      c_preprocessor_definitions="STM32F429_439xx;INITIALIZE_STACK"
+      c_user_include_directories="$(TargetsDir)/STM32/include;$(TargetsDir)/CMSIS_3/CMSIS/Include;$(ProjectDir)/"
+      debug_register_definition_file="$(TargetsDir)/STM32/STM32F429x_Peripherals.xml"
+      linker_memory_map_file="$(TargetsDir)/STM32/STM32F429ZI_MemoryMap.xml"
+      linker_memory_map_macros="SDRAM2_SIZE=8388608"
+      linker_section_placement_file="$(StudioDir)/targets/Cortex_M/flash_placement.xml"
+      project_directory=""
+      project_type="Executable"
+      property_groups_file_path="$(TargetsDir)/STM32/propertyGroups.xml"
+      target_get_partname_script="GetPartName()"
+      target_match_partname_script="MatchPartName(&quot;$(Target)&quot;)"
+      target_reset_script="Reset()"
+      target_script_file="$(TargetsDir)/STM32/STM32_Target.js"
+      target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)" />
+    <configuration
+      Name="Flash"
+      arm_target_flash_loader_file_path="$(TargetsDir)/STM32/Release/STM32F2xx_Loader_rpc.elf"
+      arm_target_flash_loader_type="LIBMEM RPC Loader"
+      arm_target_loader_can_erase_all="Yes"
+      arm_target_loader_can_lock_all="No"
+      arm_target_loader_can_lock_range="No"
+      arm_target_loader_can_unlock_all="No"
+      arm_target_loader_can_unlock_range="No"
+      target_reset_script="FLASHReset()" />
+    <folder Name="Source Files">
+      <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
+      <file file_name="main.c" />
+      <file file_name="stm32f429i_discovery_sdram.c" />
+      <file file_name="stm32f4xx_fmc.c" />
+      <file file_name="stm32f4xx_rcc.c" />
+      <file file_name="stm32f4xx_gpio.c" />
+      <file file_name="system_stm32f4xx.c" />
+      <folder Name="common">
+        <file file_name="common/bitstream.c" />
+        <file file_name="common/common.c" />
+        <file file_name="common/common-cabac.c" />
+        <file file_name="common/common-macroblock.c" />
+        <file file_name="common/common-set.c" />
+        <file file_name="common/cpu.c" />
+        <file file_name="common/dct.c" />
+        <file file_name="common/deblock.c" />
+        <file file_name="common/frame.c">
+          <configuration Name="THUMB Release" build_exclude_from_build="No" />
+        </file>
+        <file file_name="common/mc.c" />
+        <file file_name="common/mvpred.c" />
+        <file file_name="common/osdep.c" />
+        <file file_name="common/pixel.c" />
+        <file file_name="common/predict.c" />
+        <file file_name="common/quant.c" />
+        <file file_name="common/rectangle.c" />
+        <file file_name="common/vlc.c" />
+      </folder>
+      <folder Name="encoder">
+        <file file_name="encoder/analyse.c" />
+        <file file_name="encoder/cabac.c" />
+        <file file_name="encoder/cavlc.c" />
+        <file file_name="encoder/encoder.c" />
+        <file file_name="encoder/lookahead.c" />
+        <file file_name="encoder/macroblock.c" />
+        <file file_name="encoder/me.c" />
+        <file file_name="encoder/ratecontrol.c" />
+        <file file_name="encoder/set.c" />
+      </folder>
+    </folder>
+    <folder Name="System Files">
+      <file file_name="$(StudioDir)/source/thumb_crt0.s" />
+      <file file_name="$(TargetsDir)/STM32/STM32_Startup.s" />
+      <file file_name="flash_placement.xml" />
+    </folder>
+  </project>
+  <configuration Name="THUMB Debug" inherited_configurations="THUMB;Debug" />
+  <configuration
+    Name="THUMB"
+    Platform="ARM"
+    arm_instruction_set="Thumb"
+    arm_library_instruction_set="Thumb"
+    c_preprocessor_definitions="__THUMB"
+    hidden="Yes" />
+  <configuration
+    Name="Debug"
+    c_preprocessor_definitions="DEBUG"
+    gcc_debugging_level="Level 3"
+    gcc_optimization_level="None"
+    hidden="Yes" />
+  <configuration
+    Name="THUMB Release"
+    inherited_configurations="THUMB;Release" />
+  <configuration
+    Name="Release"
+    c_preprocessor_definitions="NDEBUG"
+    gcc_debugging_level="Level 1"
+    gcc_optimization_level="Level 1"
+    hidden="Yes" />
+</solution>
